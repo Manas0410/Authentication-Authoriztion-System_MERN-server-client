@@ -31,5 +31,5 @@ const validateToken = (req: Ireq, res: Response, next: NextFunction) => {
   }
   next();
 };
-//err decode
+
 export default validateToken;
