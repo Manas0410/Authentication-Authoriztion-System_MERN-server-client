@@ -4,8 +4,8 @@ import { loginUser, registerUser } from "./authentication.Controller";
 
 const authRouter: Router = Express.Router();
 
-authRouter.post("/registeruser", validator, registerUser);
+authRouter.post("/signup", validator, registerUser);
 
-authRouter.post("/login", validator, loginUser);
+authRouter.post("/signin", validator, loginUser);
 
 export default authRouter;
