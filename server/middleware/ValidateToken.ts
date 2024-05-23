@@ -33,3 +33,5 @@ const validateToken = (req: Ireq, res: Response, next: NextFunction) => {
 };
 
 export default validateToken;
+
+// this is to check auth and set the role to req and proceed to next
