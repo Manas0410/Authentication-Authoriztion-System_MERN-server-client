@@ -5,6 +5,7 @@ import { port } from "./config";
 import authRouter from "./src/API/Authentication/authentication.Routes";
 import validateToken from "./middleware/ValidateToken";
 import adminRouter from "./src/API/Admin/admin.route";
+import RefreshTokenRoute from "./src/API/RefreshToken/refreshToken.Route";
 
 (async (): Promise<void> => {
   try {
@@ -21,7 +22,9 @@ import adminRouter from "./src/API/Admin/admin.route";
 
     app.use("/", authRouter);
 
-    app.use("/t", validateToken, adminRouter);
+    app.use("/getAdminData", validateToken, adminRouter);
+
+    app.use("/refreshToken", RefreshTokenRoute);
 
     app.listen(port, () => {
       console.log("app is running on http://localhost:3000");

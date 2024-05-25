@@ -2,24 +2,32 @@ import axios from "axios";
 
 const axiosConfigForRefreshingTheToken = () => {
   // creting config for url that needs token for authentication
-  // const urlConfig = axios.create({
-  //   baseURL: "url",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // });
+  const urlConfig = axios.create({
+    baseURL: "url",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   // configure req before api call
-  axios.interceptors.request.use((request) => {
-    console.log("before req");
-    return request;
-  });
+  urlConfig.interceptors.request.use(
+    (config) => {
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        config.headers.authorization = `JWT ${accessToken}`;
+      }
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
 
   //  configure reeposnse after responswe.
-  axios.interceptors.response.use((response) => {
-    console.log(response, "after res");
-    return response;
-  });
+  urlConfig.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalReq = error.config;
+    }
+  );
 };
 
 export default axiosConfigForRefreshingTheToken;

@@ -50,10 +50,14 @@ export const loginUser = async (req: Request, res: Response) => {
       role: userDataFromDb?.role,
     };
 
-    const token = await generateToken(dataToCreateToken);
-    res
-      .status(200)
-      .json({ message: "user successfully logged in", token: token });
+    const accessToken = await generateToken(dataToCreateToken, "30s");
+    const refreshToken = await generateToken(dataToCreateToken, "50m");
+
+    res.status(200).json({
+      message: "user successfully logged in",
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    });
   } catch (err: any) {
     console.log(err);
   }
