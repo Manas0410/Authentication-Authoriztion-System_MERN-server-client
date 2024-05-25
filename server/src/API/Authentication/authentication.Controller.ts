@@ -55,8 +55,11 @@ export const loginUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "user successfully logged in",
-      accessToken: accessToken,
-      refreshToken: refreshToken,
+      meta: {
+        ...dataToCreateToken,
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      },
     });
   } catch (err: any) {
     console.log(err);
