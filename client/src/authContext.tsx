@@ -7,7 +7,7 @@ import React, {
 } from "react";
 
 // Define the user type
-interface User {
+export interface User {
   name: string;
   email: string;
   role: string;
