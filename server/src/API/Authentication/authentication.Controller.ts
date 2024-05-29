@@ -53,6 +53,12 @@ export const loginUser = async (req: Request, res: Response) => {
     const accessToken = await generateToken(dataToCreateToken, "30s");
     const refreshToken = await generateToken(dataToCreateToken, "50m");
 
+    res.cookie("refresh", refreshToken, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 3600000,
+    });
+
     res.status(200).json({
       message: "user successfully logged in",
       meta: {
