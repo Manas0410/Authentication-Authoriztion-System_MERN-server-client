@@ -1,5 +1,5 @@
 import axios from "axios";
-import { logout } from "../src/utils/loginmethods";
+import { useAuth } from "../src/utils/loginmethods";
 
 const axiosConfigForRefreshingTheToken = () => {
   // creting config for url that needs token for authentication
@@ -40,6 +40,7 @@ const axiosConfigForRefreshingTheToken = () => {
             originalRequest.headers.authorization = `JWT ${newAccessToken}`;
             return axios(originalRequest);
           } catch (error) {
+            const { logout } = useAuth();
             logout();
           }
         }

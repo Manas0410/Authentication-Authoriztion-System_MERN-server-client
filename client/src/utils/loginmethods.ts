@@ -1,16 +1,20 @@
 import { useContext } from "react";
 import { User, UserContext } from "../authContext";
 
-const context = useContext(UserContext);
+export const useAuth = () => {
+  const context = useContext(UserContext);
 
-if (!context) {
-  throw new Error("useAuth must be used within a UserContextProvider");
-}
+  if (!context) {
+    throw new Error("useAuth must be used within a UserContextProvider");
+  }
 
-const { setUser } = context;
+  const { setUser } = context;
 
-export const login = (userData: User) => {
-  setUser(userData);
+  const login = (userData: User) => {
+    setUser(userData);
+  };
+
+  const logout = () => setUser(null);
+
+  return { login, logout };
 };
-
-export const logout = () => setUser(null);

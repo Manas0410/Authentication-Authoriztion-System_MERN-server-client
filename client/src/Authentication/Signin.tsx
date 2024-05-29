@@ -23,11 +23,13 @@ const Signin: React.FC = () => {
 
   const onsubmit = (
     values: IsighinData,
+
     {
       resetForm,
       setSubmitting,
     }: { resetForm: () => void; setSubmitting: (_: boolean) => void }
   ) => {
+    console.log(values);
     alert(JSON.stringify(values));
     resetForm();
     setSubmitting(false);
