@@ -1,6 +1,7 @@
 import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { useAuth } from "../utils/loginmethods";
 
 interface IsighinData {
   email: string;
@@ -8,6 +9,8 @@ interface IsighinData {
 }
 
 const Signin: React.FC = () => {
+  const { login } = useAuth();
+
   const ValidationSchema = Yup.object({
     email: Yup.string().email("invalid email id").required("required"),
     password: Yup.string()
@@ -21,7 +24,7 @@ const Signin: React.FC = () => {
     password: "",
   };
 
-  const onsubmit = (
+  const onsubmit = async (
     values: IsighinData,
 
     {
@@ -29,7 +32,7 @@ const Signin: React.FC = () => {
       setSubmitting,
     }: { resetForm: () => void; setSubmitting: (_: boolean) => void }
   ) => {
-    console.log(values);
+    await login(values);
     alert(JSON.stringify(values));
     resetForm();
     setSubmitting(false);
