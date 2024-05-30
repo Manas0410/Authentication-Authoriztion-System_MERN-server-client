@@ -33,7 +33,6 @@ const Signin: React.FC = () => {
     }: { resetForm: () => void; setSubmitting: (_: boolean) => void }
   ) => {
     await login(values);
-    alert(JSON.stringify(values));
     resetForm();
     setSubmitting(false);
   };
