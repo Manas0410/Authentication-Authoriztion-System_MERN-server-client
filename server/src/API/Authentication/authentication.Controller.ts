@@ -23,6 +23,7 @@ export const registerUser = async (req: Request, res: Response) => {
     res.status(201).send("account created successfully !!");
   } catch (err: any) {
     console.log(err);
+    res.status(400).send({ message: err?.message });
   }
 };
 
@@ -50,7 +51,7 @@ export const loginUser = async (req: Request, res: Response) => {
       role: userDataFromDb?.role,
     };
 
-    const accessToken = await generateToken(dataToCreateToken, "30s");
+    const accessToken = await generateToken(dataToCreateToken, "15m");
     const refreshToken = await generateToken(dataToCreateToken, "50m");
 
     res.cookie("refresh", refreshToken, {
@@ -69,5 +70,6 @@ export const loginUser = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     console.log(err);
+    res.status(400).send({ message: err?.message });
   }
 };

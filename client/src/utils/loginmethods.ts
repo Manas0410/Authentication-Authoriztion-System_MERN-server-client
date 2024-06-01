@@ -3,6 +3,7 @@ import { User, UserContext } from "../authContext";
 import axios from "axios";
 import { API_BASE_URL } from "../../configs/environmentConfigurations";
 import { useNavigate } from "react-router-dom";
+import { accessTokenKey, refreshTokenKey } from "../../envconfig";
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -21,8 +22,8 @@ export const useAuth = () => {
         return;
       }
       const { meta } = res.data;
-      localStorage.setItem("accesstoken", meta.accessToken);
-      localStorage.setItem("refreshtoken", meta.refreshToken);
+      localStorage.setItem(accessTokenKey, meta.accessToken);
+      localStorage.setItem(refreshTokenKey, meta.refreshToken);
       const user: User = {
         name: meta?.name,
         email: meta?.email,

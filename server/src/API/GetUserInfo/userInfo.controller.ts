@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import verifyToken from "../../../utils/token/verify-token";
-import { error } from "console";
 
 const getUserInfoByTokenController = async (req: Request, res: Response) => {
   try {

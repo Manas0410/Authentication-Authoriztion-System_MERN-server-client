@@ -23,11 +23,11 @@ import getUserInfoByToken from "./src/API/GetUserInfo/userInfo.routes";
 
     app.use("/", authRouter);
 
-    app.use("/getAdminData", validateToken, adminRouter);
-
     app.use("/refreshToken", RefreshTokenRoute);
 
-    app.use("/getUserInfoByToken", getUserInfoByToken);
+    app.use("/user/getAdminData", validateToken, adminRouter);
+
+    app.use("/user/getUserInfoByToken", getUserInfoByToken);
 
     app.listen(port, () => {
       console.log("app is running on http://localhost:3000");
